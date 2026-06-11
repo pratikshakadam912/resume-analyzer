@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis History</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            padding: 40px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+            color: #111827;
+        }
+
+        .history-container {
+            display: grid;
+            gap: 20px;
+        }
+
+        .history-card {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .score {
+            color: #4f46e5;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .date {
+            margin-top: 10px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .btn {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 12px 22px;
+            background: #4f46e5;
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <h1>Your Resume Analysis History</h1>
+
+    <div class="history-container">
+
+        {% for analysis in analyses %}
+
+        <div class="history-card">
+
+            <h2>{{ analysis.filename }}</h2>
+
+            <div class="score">
+                Match Score: {{ analysis.match_score }}%
+            </div>
+
+            <div class="score">
+                ATS Score: {{ analysis.ats_score }}%
+            </div>
+
+            <p style="margin-top:15px;">
+                Missing Skills:
+                {{ analysis.missing_skills }}
+            </p>
+
+            <div class="date">
+                {{ analysis.created_at }}
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    <a href="/dashboard" class="btn">
+        Back to Dashboard
+    </a>
+
+</body>
+
+</html>

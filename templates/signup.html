@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Analyzer - Sign Up</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed, #9333ea);
+            padding:20px;
+        }
+
+        .container{
+            width:950px;
+            min-height:600px;
+            background:white;
+            border-radius:25px;
+            overflow:hidden;
+            display:flex;
+            box-shadow:0 15px 40px rgba(0,0,0,0.25);
+        }
+
+        /* LEFT SIDE */
+
+        .left{
+            flex:1;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color:white;
+            padding:60px;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            position:relative;
+        }
+
+        .left h1{
+            font-size:42px;
+            margin-bottom:20px;
+            line-height:1.2;
+        }
+
+        .left p{
+            font-size:16px;
+            opacity:0.9;
+            line-height:1.8;
+        }
+
+        .circle1{
+            position:absolute;
+            width:180px;
+            height:180px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.1);
+            top:-40px;
+            right:-40px;
+        }
+
+        .circle2{
+            position:absolute;
+            width:120px;
+            height:120px;
+            border-radius:50%;
+            background:rgba(255,255,255,0.1);
+            bottom:30px;
+            left:-30px;
+        }
+
+        /* RIGHT SIDE */
+
+        .right{
+            flex:1;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:40px;
+        }
+
+        .signup-box{
+            width:100%;
+            max-width:380px;
+        }
+
+        .signup-box h2{
+            font-size:32px;
+            margin-bottom:10px;
+            color:#111827;
+        }
+
+        .signup-box p{
+            color:#6b7280;
+            margin-bottom:30px;
+        }
+
+        .input-group{
+            margin-bottom:18px;
+        }
+
+        .input-group label{
+            display:block;
+            margin-bottom:8px;
+            color:#374151;
+            font-weight:500;
+        }
+
+        .input-group input{
+            width:100%;
+            padding:14px;
+            border:none;
+            background:#f3f4f6;
+            border-radius:12px;
+            outline:none;
+            font-size:15px;
+            transition:0.3s;
+        }
+
+        .input-group input:focus{
+            background:#e5e7eb;
+        }
+
+        .signup-btn{
+            width:100%;
+            padding:14px;
+            border:none;
+            border-radius:12px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color:white;
+            font-size:16px;
+            font-weight:600;
+            cursor:pointer;
+            margin-top:10px;
+            transition:0.3s;
+        }
+
+        .signup-btn:hover{
+            transform:translateY(-2px);
+            box-shadow:0 10px 20px rgba(124,58,237,0.3);
+        }
+
+        .login-text{
+            margin-top:25px;
+            text-align:center;
+            color:#6b7280;
+        }
+
+        .login-text a{
+            color:#6366f1;
+            text-decoration:none;
+            font-weight:600;
+        }
+
+        @media(max-width:900px){
+
+            .container{
+                width:95%;
+                flex-direction:column;
+            }
+
+            .left{
+                padding:40px;
+                text-align:center;
+            }
+
+            .left h1{
+                font-size:32px;
+            }
+
+            .right{
+                padding:40px 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- LEFT -->
+
+        <div class="left">
+
+            <div class="circle1"></div>
+            <div class="circle2"></div>
+
+            <h1>Create Your Account</h1>
+
+            <p>
+                Join the AI Resume Analyzer platform and discover how well your
+                resume matches job descriptions with intelligent AI-powered analysis.
+            </p>
+
+        </div>
+
+        <!-- RIGHT -->
+
+        <div class="right">
+
+            <div class="signup-box">
+
+                <h2>Sign Up</h2>
+
+                <p>Create your account to get started.</p>
+
+                <!-- FORM -->
+
+                <form method="POST">
+
+                    <div class="input-group">
+                        <label>Full Name</label>
+                        <input 
+                            type="text" 
+                            name="fullname"
+                            placeholder="Enter your full name"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Email</label>
+                        <input 
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input 
+                            type="password"
+                            name="password"
+                            placeholder="Create password"
+                            required
+                        >
+                    </div>
+
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input 
+                            type="password"
+                            placeholder="Confirm password"
+                            required
+                        >
+                    </div>
+
+                    <button class="signup-btn">
+                        Create Account
+                    </button>
+
+                </form>
+
+                <div class="login-text">
+                    Already have an account?
+                    <a href="/">Login</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Resume Analysis Result</title>
+
+    <!-- GOOGLE FONT -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CHART JS -->
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        :root {
+
+            --primary: #6366f1;
+            --primary-light: #818cf8;
+
+            --bg: #f1f5f9;
+            --card: rgba(255, 255, 255, 0.78);
+
+            --text: #0f172a;
+            --subtext: #64748b;
+
+            --border: rgba(255, 255, 255, 0.4);
+
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+
+        }
+
+        body {
+
+            background:
+                radial-gradient(circle at top left,
+                    rgba(99, 102, 241, 0.18),
+                    transparent 30%),
+
+                radial-gradient(circle at bottom right,
+                    rgba(168, 85, 247, 0.12),
+                    transparent 30%),
+
+                var(--bg);
+
+            color: var(--text);
+
+            min-height: 100vh;
+        }
+
+        /* NAVBAR */
+
+        .navbar {
+
+            width: 100%;
+
+            padding: 20px 8%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            background: rgba(255, 255, 255, 0.65);
+
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+            position: sticky;
+
+            top: 0;
+
+            z-index: 1000;
+        }
+
+        .logo {
+
+            font-size: 28px;
+
+            font-weight: 800;
+
+            background: linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            -webkit-background-clip: text;
+
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+
+            display: flex;
+
+            gap: 25px;
+
+            align-items: center;
+        }
+
+        .nav-links a {
+
+            text-decoration: none;
+
+            color: var(--subtext);
+
+            font-weight: 500;
+
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+
+            color: var(--primary);
+        }
+
+        .logout-btn {
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            color: white !important;
+
+            padding: 12px 18px;
+
+            border-radius: 14px;
+
+            box-shadow:
+                0 10px 25px rgba(99, 102, 241, 0.22);
+        }
+
+        /* HERO */
+
+        .hero {
+
+            padding: 65px 8% 30px;
+        }
+
+        .hero h1 {
+
+            font-size: 52px;
+
+            line-height: 1.1;
+
+            font-weight: 800;
+
+            max-width: 750px;
+        }
+
+        .hero p {
+
+            margin-top: 20px;
+
+            max-width: 700px;
+
+            color: var(--subtext);
+
+            line-height: 1.9;
+
+            font-size: 16px;
+        }
+
+        /* MAIN CONTAINER */
+
+        .container {
+
+            padding: 20px 8% 70px;
+        }
+
+        /* GRID */
+
+        .top-section {
+
+            display: grid;
+
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
+            gap: 28px;
+        }
+
+        /* CARD */
+
+        .card {
+
+            background: var(--card);
+
+            backdrop-filter: blur(20px);
+
+            border: 1px solid var(--border);
+
+            border-radius: 30px;
+
+            padding: 30px;
+
+            box-shadow:
+                0 10px 40px rgba(15, 23, 42, 0.08);
+
+            overflow: hidden;
+
+            margin-bottom: 28px;
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 20px 50px rgba(15, 23, 42, 0.12);
+        }
+
+        .card h2 {
+
+            font-size: 24px;
+
+            margin-bottom: 24px;
+
+            font-weight: 700;
+        }
+
+        /* SCORE CARD */
+
+        .score-card {
+
+            text-align: center;
+        }
+
+        .score-circle {
+
+            width: 150px;
+            height: 150px;
+
+            margin: auto;
+
+            border-radius: 50%;
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            color: white;
+
+            font-size: 38px;
+
+            font-weight: 800;
+
+            box-shadow:
+                0 20px 40px rgba(99, 102, 241, 0.25);
+
+            margin-bottom: 20px;
+        }
+
+        .status {
+
+            font-size: 16px;
+
+            font-weight: 600;
+        }
+
+        .excellent {
+            color: var(--success);
+        }
+
+        .good {
+            color: var(--warning);
+        }
+
+        .poor {
+            color: var(--danger);
+        }
+
+        /* TEXT BOX */
+
+        .text-box {
+
+            background:
+                rgba(248, 250, 252, 0.9);
+
+            border:
+                1px solid rgba(226, 232, 240, 0.9);
+
+            border-radius: 22px;
+
+            padding: 22px;
+
+            color: #334155;
+
+            line-height: 1.9;
+
+            font-size: 15px;
+
+            overflow-wrap: break-word;
+
+            word-break: break-word;
+        }
+
+        /* SKILLS */
+
+        .skills-grid,
+        .skills-container {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 14px;
+        }
+
+        .skill-item {
+
+            background:
+                linear-gradient(135deg,
+                    #eef2ff,
+                    #f5f3ff);
+
+            color: #4338ca;
+
+            padding: 12px 18px;
+
+            border-radius: 14px;
+
+            font-size: 14px;
+
+            font-weight: 600;
+
+            border:
+                1px solid rgba(99, 102, 241, 0.08);
+
+            transition: 0.3s;
+        }
+
+        .skill-item:hover {
+
+            transform: translateY(-2px);
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            color: white;
+        }
+
+        /* RESUME */
+
+        .resume-preview {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 18px;
+        }
+
+        .resume-row {
+
+            background:
+                rgba(248, 250, 252, 0.8);
+
+            border:
+                1px solid rgba(226, 232, 240, 0.8);
+
+            padding: 22px;
+
+            border-radius: 22px;
+
+            transition: 0.3s;
+        }
+
+        .resume-row:hover {
+
+            transform: translateY(-2px);
+
+            border-color: rgba(99, 102, 241, 0.18);
+        }
+
+        .resume-label {
+
+            color: var(--primary);
+
+            font-size: 13px;
+
+            font-weight: 700;
+
+            letter-spacing: 1px;
+
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+        }
+
+        .resume-content {
+
+            color: #334155;
+
+            line-height: 1.9;
+
+            font-size: 15px;
+
+            word-break: break-word;
+        }
+
+        /* FEEDBACK */
+
+        .suggestion-box {
+
+            background:
+                rgba(248, 250, 252, 0.9);
+
+            border-left:
+                4px solid var(--primary);
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            margin-top: 16px;
+
+            color: #334155;
+
+            line-height: 1.8;
+
+            transition: 0.3s;
+        }
+
+        .suggestion-box:hover {
+
+            transform: translateX(4px);
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+
+            display: flex;
+
+            gap: 18px;
+
+            flex-wrap: wrap;
+
+            margin-top: 30px;
+        }
+
+        .btn {
+
+            text-decoration: none;
+
+            padding: 14px 24px;
+
+            border-radius: 16px;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .primary-btn {
+
+            background:
+                linear-gradient(135deg,
+                    #6366f1,
+                    #8b5cf6);
+
+            color: white;
+
+            box-shadow:
+                0 10px 25px rgba(99, 102, 241, 0.22);
+        }
+
+        .secondary-btn {
+
+            background: white;
+
+            color: var(--text);
+
+            border:
+                1px solid rgba(226, 232, 240, 0.9);
+        }
+
+        .btn:hover {
+
+            transform: translateY(-2px);
+        }
+
+        /* CHART */
+
+        canvas {
+
+            margin-top: 15px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:1000px) {
+
+            .top-section {
+
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width:768px) {
+
+            .navbar {
+
+                flex-direction: column;
+
+                gap: 20px;
+
+                padding: 20px;
+            }
+
+            .nav-links {
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .hero {
+
+                padding: 45px 20px 20px;
+            }
+
+            .hero h1 {
+
+                font-size: 36px;
+            }
+
+            .container {
+
+                padding: 20px;
+            }
+
+            .card {
+
+                padding: 22px;
+            }
+
+            .score-circle {
+
+                width: 130px;
+                height: 130px;
+
+                font-size: 32px;
+            }
+
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- TOP SECTION -->
+
+        <div class="top-section">
+
+            <!-- MATCH SCORE -->
+
+            <div class="card score-card">
+
+                <h2>Resume Match Score</h2>
+
+                <div class="score-circle">
+                    {{ score }}%
+                </div>
+
+                {% if score >= 80 %}
+
+                <div class="status excellent">
+                    Excellent Match
+                </div>
+
+                {% elif score >= 60 %}
+
+                <div class="status good">
+                    Good Match
+                </div>
+
+                {% else %}
+
+                <div class="status poor">
+                    Needs Improvement
+                </div>
+
+                {% endif %}
+
+            </div>
+
+            <!-- ATS SCORE -->
+
+            <div class="card score-card">
+
+                <h2>ATS Resume Score</h2>
+
+                <div class="score-circle">
+                    {{ ats_score }}%
+                </div>
+
+                <p style="margin-top:20px; color:#94a3b8; line-height:1.8;">
+
+                    ATS score is calculated using
+                    formatting, keyword relevance,
+                    readability, structure and skill matching.
+
+                </p>
+
+            </div>
+
+            <!-- MISSING SKILLS -->
+
+            <div class="card">
+
+                <h2>Missing Skills</h2>
+
+                {% if missing_skills %}
+
+                <div class="skills-container">
+
+                    {% for skill in missing_skills %}
+
+                    <div class="skill-item">
+                        {{ skill }}
+                    </div>
+
+                    {% endfor %}
+
+                </div>
+
+                {% else %}
+
+                <div class="no-skills">
+                    No major missing skills detected
+                </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+        <!-- AI SUMMARY -->
+
+        <div class="card" style="margin-top:30px;">
+
+            <h2>AI Resume Summary</h2>
+
+            <div class="text-box">
+                {{ resume_summary }}
+            </div>
+
+        </div>
+
+        <!-- JOB DESCRIPTION -->
+
+        <div class="card" style="margin-top:30px;">
+
+            <h2>Job Description</h2>
+
+            <div class="text-box">
+                {{ job_description }}
+            </div>
+
+        </div>
+
+        <!-- EXTRACTED RESUME -->
+
+        <!-- RESUME ANALYSIS DETAILS -->
+
+        <div class="card section">
+
+            <h2>Resume Intelligence</h2>
+
+            <div class="resume-preview">
+
+                <!-- NAME -->
+
+                <div class="resume-row">
+
+                    <div class="resume-label">
+                        Candidate Name
+                    </div>
+
+                    <div class="resume-content">
+
+                        {% if parsed_data.name %}
+
+                        {{ parsed_data.name }}
+
+                        {% else %}
+
+                        Not Detected
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- EMAIL -->
+
+                <div class="resume-row">
+
+                    <div class="resume-label">
+                        Email
+                    </div>
+
+                    <div class="resume-content">
+
+                        {% if parsed_data.email %}
+
+                        {{ parsed_data.email }}
+
+                        {% else %}
+
+                        Not Detected
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- PHONE -->
+
+                <div class="resume-row">
+
+                    <div class="resume-label">
+                        Phone Number
+                    </div>
+
+                    <div class="resume-content">
+
+                        {% if parsed_data.phone %}
+
+                        {{ parsed_data.phone }}
+
+                        {% else %}
+
+                        Not Detected
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- SKILLS -->
+
+                <div class="resume-row">
+
+                    <div class="resume-label">
+                        Detected Skills
+                    </div>
+
+                    <div class="skills-grid">
+
+                        {% if parsed_data.skills %}
+
+                        {% for skill in parsed_data.skills %}
+
+                        <div class="skill-item">
+                            {{ skill }}
+                        </div>
+
+                        {% endfor %}
+
+                        {% else %}
+
+                        <div class="resume-content">
+                            No skills detected
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- EDUCATION -->
+
+                <div class="resume-row">
+
+                    <div class="resume-label">
+                        Education
+                    </div>
+
+                    <div class="resume-content">
+
+                        {% if parsed_data.education %}
+
+                        <ul>
+
+                            {% for edu in parsed_data.education[:5] %}
+
+                            <li>{{ edu }}</li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                        {% else %}
+
+                        Education details not detected
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- EXPERIENCE -->
+
+                <div class="resume-row">
+
+                    <div class="resume-label">
+                        Experience
+                    </div>
+
+                    <div class="resume-content">
+
+                        {% if parsed_data.experience %}
+
+                        <ul>
+
+                            {% for exp in parsed_data.experience[:5] %}
+
+                            <li>{{ exp }}</li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                        {% else %}
+
+                        No experience detected
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- PROJECTS -->
+
+                <div class="resume-row">
+
+                    <div class="resume-label">
+                        Projects
+                    </div>
+
+                    <div class="resume-content">
+
+                        {% if parsed_data.projects %}
+
+                        <ul>
+
+                            {% for project in parsed_data.projects[:5] %}
+
+                            <li>{{ project }}</li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                        {% else %}
+
+                        No projects detected
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <!-- CERTIFICATIONS -->
+
+                <div class="resume-row">
+
+                    <div class="resume-label">
+                        Certifications
+                    </div>
+
+                    <div class="resume-content">
+
+                        {% if parsed_data.certifications %}
+
+                        <ul>
+
+                            {% for cert in parsed_data.certifications[:5] %}
+
+                            <li>{{ cert }}</li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                        {% else %}
+
+                        No certifications detected
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+        <!-- AI FEEDBACK -->
+
+        <div class="card" style="margin-top:30px;">
+
+            <h2>AI Resume Suggestions</h2>
+
+            {% for item in feedback %}
+
+            <div class="suggestion-box">
+                {{ item }}
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- ANALYTICS -->
+
+        <div class="card" style="margin-top:30px;">
+
+            <h2>Resume Analytics</h2>
+
+            <canvas id="resumeChart"></canvas>
+
+        </div>
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <a href="/dashboard" class="btn primary-btn">
+                Analyze Another Resume
+            </a>
+
+            <a href="/history" class="btn secondary-btn">
+                View History
+            </a>
+
+            <a href="/logout" class="btn secondary-btn">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- CHART -->
+
+    <script>
+
+        const ctx = document.getElementById("resumeChart");
+
+        const score = Number("{{ score|default(0) }}");
+        const atsScore = Number("{{ ats_score|default(0) }}");
+        const matchedSkills = Number("{{ matched_skills|length|default(0) }}");
+        const missingSkills = Number("{{ total_missing|default(0) }}");
+
+        new Chart(ctx, {
+
+            type: "bar",
+
+            data: {
+
+                labels: [
+                    "Resume Match",
+                    "ATS Score",
+                    "Matched Skills",
+                    "Missing Skills"
+                ],
+
+                datasets: [{
+
+                    data: [
+                        score,
+                        atsScore,
+                        matchedSkills,
+                        missingSkills
+                    ],
+
+                    backgroundColor: [
+                        "#374151",
+                        "#4b5563",
+                        "#6b7280",
+                        "#9ca3af"
+                    ],
+
+                    borderRadius: 12
+
+                }]
+
+            },
+
+            options: {
+
+                responsive: true,
+
+                plugins: {
+
+                    legend: {
+                        display: false
+                    }
+
+                },
+
+                scales: {
+
+                    x: {
+                        ticks: {
+                            color: "#d1d5db"
+                        },
+                        grid: {
+                            color: "#232634"
+                        }
+                    },
+
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        ticks: {
+                            color: "#d1d5db"
+                        },
+                        grid: {
+                            color: "#232634"
+                        }
+                    }
+
+                }
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
